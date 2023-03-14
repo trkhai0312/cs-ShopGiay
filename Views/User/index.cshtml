@@ -1,0 +1,793 @@
+﻿
+@{
+    ViewBag.Title = "SNEAKER SHOP || NTK";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<!-- Owl carousel init -->
+<script language="javascript" src="~/Scripts/owlcarousel.js">
+</script>
+
+<div id="PageContainer" class="is-moved-by-drawer">
+    <main class="main-content" role="main">
+        <div id="PageContainer" class="is-moved-by-drawer">
+            <main class="main-content" role="main">
+
+                <style>
+                    body,
+                    html {
+                        height: 100%;
+                    }
+                </style>
+                <section id="home-featured-products">
+                    <div class="wrapper">
+                        <div class="inner">
+                            <h2 class="section-title text-center">
+                                Sản phẩm khuyến mãi
+                            </h2>
+                            <div class="home-collection-countdown text-center">
+                                <div class="countdown-days">
+                                    <div id="days">
+                                        11
+                                    </div>
+                                    <div>
+                                        Ngày
+                                    </div>
+                                </div>
+                                <div class="countdown-hrs">
+                                    <div id="hrs">
+                                        11
+                                    </div>
+                                    <div>
+                                        Giờ
+                                    </div>
+                                </div>
+                                <div class="countdown-mins">
+                                    <div id="mins">
+                                        11
+                                    </div>
+                                    <div>
+                                        Phút
+                                    </div>
+                                </div>
+                                <div class="countdown-secs">
+                                    <div id="secs">
+                                        11
+                                    </div>
+                                    <div>
+                                        Giây
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+
+
+
+
+                <section id="home-banners">
+                    <div class="wrapper">
+                        <div class="inner">
+                            <div class="grid">
+
+                                <div class="grid__item large--one-quarter medium--one-quarter small--one-half">
+                                    <div class="hb-img">
+                                        <a href="@Url.Action("sanpham","User")">
+                                            <img src="~/img/logotrangchu.jpg" alt="Index Banner Image 1" height="172" width="267" style="margin-top: 50px" />
+                                        </a>
+                                    </div>
+                                </div>
+
+
+                                <div class="grid__item large--one-quarter medium--one-quarter small--one-half float-right">
+                                    <div class="hb-img">
+                                        <a href="@Url.Action("sanpham","User")">
+                                            <img src="~/img/hb_img35eef.png" alt="Index Banner Image 3" />
+                                        </a>
+                                    </div>
+                                </div>
+
+
+                                <div class="grid__item large--two-quarters medium--two-quarters small--one-whole">
+                                    <div class="hb-img">
+                                        <a href="@Url.Action("sanpham","User")">
+                                            <img src="~/img/hb_img25eef.png" alt="Index Banner Image 2" />
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+
+
+
+
+                <section id="home-collections">
+                    <div class="wrapper">
+                        <div class="inner">
+                            <h2 class="section-title text-center">
+                                Sản phẩm nổi bật
+                            </h2>
+                            <div class="hc-tabs-wrapper">
+                                <div class="collection-body">
+                                    <div class="grid-uniform product-list">
+
+                                        @foreach (var i in Model)
+                                        {
+                                            <div class="grid__item large--one-third medium--one-third small--one-half">
+                                                <div class="product-item">
+                                                    <div class="product-normal">
+                                                        <div class="product-img">
+                                                            <a href="@Url.Action("Chitiet","User",new { id = i.MAGIAY })">
+                                                                <img src="@Url.Content("~/img/"+@i.HINHANH)" style="height:100%" />
+                                                            </a>
+                                                            <div class="product-tags">
+                                                            </div>
+                                                            <div class="product-actions text-center clearfix">
+                                                                <div>
+                                                                    <button type="button" class="btnBuyNow buy-now medium--hide small--hide" onclick="window.location.href='@Url.Action("ThemGiohang", "GioHang", new { @iMAGIAY= i.MAGIAY, @strURL=Request.Url.ToString() })'"><span>Thêm Giỏ Hàng</span></button>
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <!--thanh nhỏ ở dưỡi-->
+                                                        <div class="product-variants-info">
+                                                            <div class="product-variants-count">
+
+                                                                <div class="list-variants-img medium--hide small--hide">
+                                                                    <div class="inner">
+                                                                        <ul class="no-bullets clearfix text-center">
+                                                                            @Html.Action("listhinhanhnhoduoi", new { id = i.MAGIAY })
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="product-title">
+                                                            <a href="@Url.Action("Chitiet","User",new { id = i.MAGIAY })">@i.TENGIAY</a>
+                                                        </div>
+
+                                                        <div class="product-price clearfix">
+                                                            <span class="current-price">@String.Format("{0:0,0}", @i.DONGIABAN)₫</span>
+
+                                                            @*<span class="original-price"><s>580,000₫</s></span>*@ <!--Gia goc-->
+
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+
+                                            </div>
+                                        }
+                                    </div>
+
+                                </div>
+
+
+
+
+
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+
+
+
+
+                <section id="home-gallery">
+                    <div class="wrapper">
+                        <div class="inner">
+                            <h2 class="section-title text-center">
+                                Kho ảnh & video
+                            </h2>
+                            <div class="grid">
+                                <div class="grid__item large--one-half medium--one-half small--one-whole">
+                                    <div class="grid">
+
+
+
+
+
+
+                                        <div class="grid__item large--one-third medium--one-third small--one-half">
+                                            <div class="hg-item">
+                                                <a href="~/img/hg_img15eef.png" data-fancybox="home-gallery-images" data-caption="Index Gallery Image 1">
+                                                    <img src="~/img/hg_img_thumb15eef.png" alt="Index Gallery Image 1" />
+                                                </a>
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+
+                                        <div class="grid__item large--one-third medium--one-third small--one-half">
+                                            <div class="hg-item">
+                                                <a href="~/img/hg_img25eef.png" data-fancybox="home-gallery-images" data-caption="Index Gallery Image 2">
+                                                    <img src="~/img/hg_img_thumb25eef.png" alt="Index Gallery Image 2" />
+                                                </a>
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+
+                                        <div class="grid__item large--one-third medium--one-third small--one-half">
+                                            <div class="hg-item">
+                                                <a href="~/img/hg_img35eef.png" data-fancybox="home-gallery-images" data-caption="Index Gallery Image 3">
+                                                    <img src="~/img/hg_img_thumb35eef.png" alt="Index Gallery Image 3" />
+                                                </a>
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+
+                                        <div class="grid__item large--one-third medium--one-third small--one-half">
+                                            <div class="hg-item">
+                                                <a href="~/img/hg_img45eef.png" data-fancybox="home-gallery-images" data-caption="Index Gallery Image 4">
+                                                    <img src="~/img/hg_img_thumb45eef.png" alt="Index Gallery Image 4" />
+                                                </a>
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+
+                                        <div class="grid__item large--one-third medium--one-third small--one-half">
+                                            <div class="hg-item">
+                                                <a href="~/img/hg_img55eef.png" data-fancybox="home-gallery-images" data-caption="Index Gallery Image 5">
+                                                    <img src="~/img/hg_img_thumb55eef.png" alt="Index Gallery Image 5" />
+                                                </a>
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+
+                                        <div class="grid__item large--one-third medium--one-third small--one-half">
+                                            <div class="hg-item">
+                                                <a href="~/img/hg_img65eef.png" data-fancybox="home-gallery-images" data-caption="Index Gallery Image 6">
+                                                    <img src="~/img/hg_img_thumb65eef.png" alt="Index Gallery Image 6" />
+                                                </a>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="grid__item large--one-half medium--one-half small--one-whole">
+                                    <div class="hg-item">
+                                        <img src="../theme.hstatic.net/1000359177/1000456422/14/video_bg5eef.png?v=110" alt="NTK SPORT - CHO ĐAM MÊ CHINH PHỤC" height="362" />
+                                        <div class="hg-item-overlay"></div>
+                                        <div class="hg-item-title text-center">
+                                            NTK SPORT - CHO ĐAM MÊ CHINH PHỤC
+                                        </div>
+                                        @*<a href="javascript:void(0)" id="hgModalYoutubeBtn" class="openYoutube">
+                                            <i class="fa fa-play-circle" aria-hidden="true"></i>
+                                        </a>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+
+
+
+
+
+                <section id="home-articles">
+                    <div class="wrapper">
+                        <div class="inner">
+                            <h2 class="section-title text-center">
+                                Tin tức nổi bật
+                            </h2>
+                            <div class="grid">
+
+                                <div id="owl-home-articles-slider" class="owl-carousel owl-theme">
+
+                                    <div class="item grid__item">
+                                        <div class="article-item">
+                                            <div class="article-img">
+                                                <a href="https://btahome.com/cach-bao-quan-giay/">
+                                                    <img src="../file.hstatic.net/1000359177/article/53410197_827004224308181_7703832643552411648_o_large.jpg" alt="CÁCH BẢO QUẢN GIÀY THỂ THAO ĐÚNG CÁCH  NHẤT" />
+                                                </a>
+                                            </div>
+                                            <div class="article-title">
+                                                <a href="https://btahome.com/cach-bao-quan-giay/">CÁCH BẢO QUẢN GIÀY THỂ THAO ĐÚNG CÁCH  NHẤT</a>
+                                            </div>
+                                            <div class="article-info">
+                                                <div class="article-date">
+                                                    <i class="fa fa-calendar" aria-hidden="true"></i> 03/12/22
+                                                </div>
+                                                <div class="article-author">
+                                                    <i class="fa fa-user" aria-hidden="true"></i> Nguyễn Trọng Khải
+                                                </div>
+                                                <div class="article-comment">
+                                                    <i class="fa fa-commenting" aria-hidden="true"></i> <span class="fb-comments-count"></span>
+                                                </div>
+                                            </div>
+                                            <div class="article-desc">
+
+                                                Mách bạn cách bảo quản giày thể thao Định kỳ vệ sinh giày, khi giày bẩn nên dùng vải sạch thấm nước xà bông lau nhẹ nhàng, không dùng bàn chải để chà, không sử dụng thuốc tẩy để ...
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="item grid__item">
+                                        <div class="article-item">
+                                            <div class="article-img">
+                                                <a href="https://momoshop.com.vn/cach-that-day-giay/">
+                                                    <img src="../file.hstatic.net/1000359177/article/image1_20190102104221_large.png" alt="Những cách buộc dây giày đẹp ai nhìn cũng thích mê" />
+                                                </a>
+                                            </div>
+                                            <div class="article-title">
+                                                <a href="https://momoshop.com.vn/cach-that-day-giay/">Những cách buộc dây giày đẹp ai nhìn cũng thích mê</a>
+                                            </div>
+                                            <div class="article-info">
+                                                <div class="article-date">
+                                                    <i class="fa fa-calendar" aria-hidden="true"></i> 03/12/22
+                                                </div>
+                                                <div class="article-author">
+                                                    <i class="fa fa-user" aria-hidden="true"></i> Nguyễn Trọng Khải
+                                                </div>
+                                                <div class="article-comment">
+                                                    <i class="fa fa-commenting" aria-hidden="true"></i> <span class="fb-comments-count"></span>
+                                                </div>
+                                            </div>
+                                            <div class="article-desc">
+
+                                                Tùy theo từng kiểu dáng khác nhau, bạn cũng sẽ có vô vàn cách buộc dây giày đẹp cần phải tham khảo đấy nhé.Đối với các tín đồ yêu thích giày sneaker, một đôi giày đẹp chính là t...
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="item grid__item">
+                                        <div class="article-item">
+                                            <div class="article-img">
+                                                <a href="https://eva.vn/nha-dep/mach-cach-giat-giay-the-thao-mot-phut-xong-ngay-ma-lai-sach-thom-nhu-moi-c169a356524.html">
+                                                    <img src="../file.hstatic.net/1000359177/article/-cach-giat-giay-the-thao-nhanh-gon-ben-dep-luc-nao-cung-sach-nhu-moi-8_large.jpg" alt="Mách cách giặt giày thể thao " một phút xong ngay" mà lại sạch thơm như mới" />
+                                                </a>
+                                            </div>
+                                            <div class="article-title">
+                                                <a href="https://eva.vn/nha-dep/mach-cach-giat-giay-the-thao-mot-phut-xong-ngay-ma-lai-sach-thom-nhu-moi-c169a356524.html">Mách cách giặt giày thể thao "một phút xong ngay" mà lại sạch thơm như mới</a>
+                                            </div>
+                                            <div class="article-info">
+                                                <div class="article-date">
+                                                    <i class="fa fa-calendar" aria-hidden="true"></i> 03/07/22
+                                                </div>
+                                                <div class="article-author">
+                                                    <i class="fa fa-user" aria-hidden="true"></i> Trần Ngọc Tân
+                                                </div>
+                                                <div class="article-comment">
+                                                    <i class="fa fa-commenting" aria-hidden="true"></i> <span class="fb-comments-count"></span>
+                                                </div>
+                                            </div>
+                                            <div class="article-desc">
+
+                                                Giày thể thao là một trong số những phụ kiện không thể thiếu, làm nổi bật bộ trang phục bạn mặc hàng ngày, tôn lên nét cá tính riêng, lại giúp bạn dễ dàng đi lại, di chuyển. Chí...
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+
+
+            </main>
+        </div>
+
+
+        <link href="~/Content/sanpham.css" rel="stylesheet" />
+
+
+
+        <section id="brands-slider">
+            <div class="inner">
+                <div class="grid">
+                    <div id="owl-brands-slider" class="owl-carousel owl-theme" style="opacity: 1; display: block;">
+                        @Html.Action("hinhthuonghieu")
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <footer id="footer">
+            <div id="ft-social-network" class="clearfix large--hide">
+
+                <a href="https://www.facebook.com/profile.php?id=100015343247268" class="fb-icon"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+
+
+                <a href="https://www.instagram.com/trkhaing_/" class="ins-icon"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+
+
+
+
+            </div>
+            <div class="ft-content">
+                <div class="wrapper">
+                    <div class="inner">
+                        <div class="grid">
+                            <div class="grid__item large--four-twelfths medium--one-whole small--one-whole">
+                                <div class="ft-contact">
+                                    <h3>Hệ thống cửa hàng giày</h3>
+                                    <div class="ft-contact-address">
+                                        Địa chỉ: Tp. Hồ Chí Minh
+                                    </div>
+                                    <div class="ft-contact-tel">
+                                        Số điện thoại: <a href="tel:0384533735">0384533735</a>
+                                    </div>
+                                    <div class="ft-contact-email">
+                                        Email: <a href="mailto:khainguyenn.0312011@gmail.com">khainguyenn.0312011@gmail.com</a>
+                                    </div>
+                                    <div class="ft-certification">
+
+
+
+
+
+
+                                        <a href="javascript:void(0)"><img src="~/img/ft_certi_img15eef.png" alt="Đã thông báo Bộ Công Thương" /></a>
+
+
+
+
+
+
+
+                                        <a href="javascript:void(0)"><img src="~/img/ft_certi_img25eef.png" alt="Đã đăng ký Bộ Công Thương" /></a>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid__item large--two-twelfths medium--one-third small--one-half">
+                                <div class="ft-nav">
+                                    <h3>Liên kết nhanh</h3>
+                                    <ul class="no-bullets">
+
+
+                                        <li>
+                                            <a href="@Url.Action("gioithieu","User")">Giới thiệu</a>
+                                        </li>
+
+                                        <li>
+                                            <a href="">Chính sách đổi trả</a>
+                                        </li>
+
+                                        <li>
+                                            <a href="">Chính sách bảo mật</a>
+                                        </li>
+
+                                        <li>
+                                            <a href="">Điều khoản dịch vụ</a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="grid__item large--two-twelfths medium--one-third small--one-half">
+                                <div class="ft-oh">
+                                    <h3>Giờ mở cửa</h3>
+                                    <div class="ft-oh-desc">
+                                        Từ 8:00 - 22:00 tất cả các ngày trong tuần (bao gồm cả các ngày lễ, ngày Tết).
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid__item large--four-twelfths medium--one-third small--one-whole">
+                                <div class="ft-subscribe">
+                                    <h3>Đăng ký nhận tin</h3>
+                                    <div class="ft-sub-desc">
+                                        Mỗi tháng chúng tôi đều có những đợt giảm giá dịch vụ và sản phẩm nhằm chi ân khách hàng. Để có thể cập nhật kịp thời những đợt giảm giá này, vui lòng nhập địa chỉ email của bạn vào ô dưới đây.
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ft-copyrights-wrapper">
+                <div class="wrapper">
+
+                    <div class="inner">
+                        <div class="grid">
+                            <div class="grid__item large--one-third small--one-whole">
+                                <div class="ft-links text-left">
+
+
+                                </div>
+                            </div>
+                            <div class="grid__item large--one-third small--one-whole">
+                                <div class="ft-social-network text-center">
+
+                                    <a href="https://www.facebook.com/profile.php?id=100015343247268"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+
+
+                                    <a href="https://www.instagram.com/trkhaing_/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+
+
+
+
+                                </div>
+                            </div>
+                            <div class="grid__item large--one-third small--one-whole">
+                                <div class="ft-copyrights text-right">
+                                    Copyrights © 2022 by <a target="_blank" href="https://www.facebook.com/profile.php?id=100015343247268">Nguyễn Trọng Khải</a>.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div id="modalAddComplete">
+        </div>
+
+        <button type="button" id="modalAddCompleteBtn" style="display: none;"></button>
+
+        <script>
+            // Get the modal
+            var modalAddComplete = document.getElementById('modalAddComplete');
+
+            // Get the button that opens the modal
+            var modalAddCompleteBtn = document.getElementById("modalAddCompleteBtn");
+
+            // When the user clicks the button, open the modal
+            modalAddCompleteBtn.onclick = function () {
+                modalAddComplete.style.display = "block";
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target == modalAddComplete) {
+                    modalAddComplete.style.display = "none";
+                }
+            }
+        </script>     
+        <script language="javascript" src="~/Scripts/ajax-cart5eef.js"></script>
+
+        <script language="javascript" src="~/Scripts/api.jquery.js"></script>
+
+        <script language="javascript" src="~/Scripts/option_selection.js"></script>
+
+        <script language="javascript" src="~/Scripts/fastclick.min5eef.js"></script>
+        <script src="//theme.hstatic.net/1000359177/1000456422/14/script.js?v=110" type="text/javascript"></script>
+        <script language="javascript" src="~/Scripts/script5eef.js"></script>
+        <script language="javascript" src="~/Scripts/timber5eef.js"></script>
+
+
+        <link rel="stylesheet" href="~/Content/jquery.fancybox.min.css" />
+        <script language="javascript" src="~/Scripts/jquery.fancybox.min.js"></script>
+
+        <script language="javascript" src="~/Scripts/handlebars.min5eef.js"></script>
+
+
+
+
+
+
+
+
+        <!-- Custom script -->
+        <script>
+            if ($(window).width() > 768) {
+                setTimeout(function () {
+                    $("#ProductThumbs .thumbnail-item:first-child a").trigger('click');
+                }, 10);
+            };
+        </script>
+
+
+        <script>
+            $(document).ready(function () {
+                $().fancybox({
+                    thumbs: true,
+                    hash: false,
+                    loop: true,
+                });
+            });
+        </script>
+
+
+
+
+
+
+
+
+        <script>
+            // Set the date we're counting down to
+            var countDownDate = new Date("July 30, 2021 23:59:59").getTime();
+
+            // Update the count down every 1 second
+            var x = setInterval(function () {
+
+                // Get todays date and time
+                var now = new Date().getTime();
+
+                // Find the distance between now an the count down date
+                var distance = countDownDate - now;
+
+                // Time calculations for days, hours, minutes and seconds
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Display the result in the element with id="demo"
+                document.getElementById("days").innerHTML = days;
+
+                document.getElementById("hrs").innerHTML = hours;
+
+                document.getElementById("mins").innerHTML = minutes;
+
+                document.getElementById("secs").innerHTML = seconds;
+
+                // If the count down is finished, write some text
+                //if (distance < 0) {
+                //      clearInterval(x);
+                //    document.getElementById("flash-sale-status").innerHTML = "Flash Sale đã kết thúc";
+                //}
+            }, 1000);
+        </script>
+
+
+
+        <script language="javascript" src="~/Scripts/hoverchangeimage.js"></script>
+
+        <script>
+            $(".hc-search-wrapper > a").click(function () {
+                $(".search-bar-header").toggle();
+            });
+        </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <script>
+            $(".mobile-btnSearch > a").click(function () {
+                $(".mobile-search-wrapper").toggle();
+            });
+        </script>
+
+
+
+
+
+
+
+
+        <!-- Back to top -->
+        <script language="javascript" src="~/Scripts/backtotop.js"></script>
+
+        <!-- Validate quantity form & trigger zoom -->
+        <script language="javascript" src="~/Scripts/triggerzoom.js"></script>
+
+
+
+
+
+        <!-- popup loaded -->
+        <script>
+            $(document).ready(function () {
+                var date = new Date();
+                var minutes = 60;
+                date.setTime(date.getTime() + (minutes * 60 * 1000));
+
+                if (getCookie('popupNewLetterStatus') != 'closed') {
+                    $('#popup-btn').trigger('click');
+                    setCookie('popupNewLetterStatus', 'closed', date);
+                };
+            })
+        </script>
+
+        <!-- quick view -->
+        <link href="~/Content/QuickView.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+    </main>
+</div>
+
+
+
+
+

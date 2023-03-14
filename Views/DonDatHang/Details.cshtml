@@ -1,0 +1,42 @@
+﻿@model ShopGiay.Models.CTDONDATHANG
+
+@{
+    ViewBag.Title = "Chi Tiết Đơn";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<h2>Chi Tiết BIll</h2>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Số lượng:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SOLUONG)
+        </dd>
+
+        <dt>
+            Mã SP:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MAGIAY)
+        </dd>
+        <dt>
+            Đơn Giá
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DONGIA)
+        </dd>
+
+    </dl>
+</div>
+<p>
+
+    @Html.ActionLink("Trở Về", "Index")
+</p>

@@ -1,0 +1,331 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<ShopGiay.Controllers.ProductViewModel>
+@{
+    ViewBag.Title = "Tất cả sản phẩm || NTK";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<section id="breadcrumb-wrapper2" class="breadcrumb-w-img">
+    <div class="breadcrumb-overlay"></div>
+    <div class="breadcrumb-content">
+        <div class="wrapper">
+            <div class="inner text-center">
+                <div class="breadcrumb-big">
+                    <h2>
+                        Tất cả sản phẩm
+                    </h2>
+                </div>
+                <div class="breadcrumb-small">
+                    <a href="@Url.Action("index","User")" title="Quay trở về trang chủ">Trang chủ</a>
+                    <span aria-hidden="true">/</span>
+                    <span>Tất cả sản phẩm</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="PageContainer" class="is-moved-by-drawer">
+    <main class="main-content" role="main">
+        <section id="collection-wrapper">
+            <div class="wrapper">
+
+                <div class="inner">
+                    <div class="grid">
+                        <div class="grid__item large--three-quarters medium--one-whole small--one-whole float-right">
+
+                            <div class="collection-content-wrapper">
+                                <div class="collection-head">
+                                    <div class="grid">
+                                        <div class="grid__item large--two-thirds medium--one-whole small--one-whole">
+                                            <div class="collection-title">
+                                                <h1>Tất cả sản phẩm</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="collection-body">
+                                    <div class="grid-uniform product-list">
+
+                                        @foreach (var i in Model)
+                                        {
+                                            <div class="grid__item large--one-third medium--one-third small--one-half">
+                                                <div class="product-item">
+                                                    <div class="product-normal">
+                                                        <div class="product-img">
+                                                            <a href="@Url.Action("Chitiet","User",new { id = i.MAGIAY })">
+                                                                <img src="@Url.Content("~/img/" + @i.HINHANH)"  height="255">
+                                                            </a>
+                                                            <div class="product-tags">
+                                                            </div>
+                                                            <div class="product-actions text-center clearfix">
+                                                                <div>
+                                                                    <button type="button" class="btnBuyNow buy-now medium--hide small--hide" onclick="window.location.href='@Url.Action("ThemGiohang", "GioHang", new { @iMAGIAY= i.MAGIAY, @strURL=Request.Url.ToString() })'"><span>Thêm Giỏ Hàng</span></button>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <!--thanh nhỏ ở dưỡi-->
+                                                        <div class="product-variants-info">
+                                                            <div class="product-variants-count">
+
+                                                                <div class="list-variants-img medium--hide small--hide">
+                                                                    <div class="inner">
+                                                                        <ul class="no-bullets clearfix text-center">
+                                                                            @Html.Action("listhinhanhnhoduoi", new { id = i.MAGIAY })
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="product-title">
+                                                            <a href="@Url.Action("Chitiet","User",new { id = i.MAGIAY })">@i.TENGIAY</a>
+                                                        </div>
+
+                                                        <div class="product-price clearfix">
+                                                            <span class="current-price">@String.Format("{0:0,0}", @i.DONGIABAN)₫</span>
+
+                                                            @*<span class="original-price"><s>580,000₫</s></span>*@ <!--Gia goc-->
+
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+
+                                            </div>
+
+
+
+
+
+                                        }
+                                    </div>
+                                    <div>
+                                        Trang @(@Model.PageNumber>Model.PageCount?Model.PageCount: Model.PageNumber)/@Model.PageCount
+                                    </div>
+                                    <div align="center">@Html.PagedListPager(Model, page => Url.Action("sanpham", new { page = page }))</div>
+                                    <link href="~/Content/phantrang.css" rel="stylesheet" />
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="grid__item large--one-quarter medium--one-whole small--one-whole">
+                            <div class="collection-sidebar-wrapper">
+                                <div class="grid">
+
+
+                                    <div class="grid__item large--one-whole medium--one-half small--one-whole">
+                                        <div class="collection-categories">
+                                            <button class="accordion cs-title col-sb-trigger">
+                                                <span>Thương Hiệu</span>
+                                            </button>
+                                            <div class="panel">
+                                                @Html.Action("thuonghieu")
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="grid__item large--one-whole medium--one-half small--one-whole">
+                                        <div class="collection-filter-type">
+                                            <button class="accordion cs-title col-sb-trigger">
+                                                <span>Loại sản phẩm</span>
+                                            </button>
+                                            <div class="panel sidebar-sort">
+                                                @Html.Action("loai")
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+<section id="brands-slider">
+    <div class="inner">
+        <div class="grid">
+            <div id="owl-brands-slider" class="owl-carousel owl-theme">
+                @Html.Action("hinhthuonghieu")
+
+            </div>
+        </div>
+    </div>
+</section>
+<footer id="footer">
+    <div id="ft-social-network" class="clearfix large--hide">
+        <a href="https://www.facebook.com/profile.php?id=100015343247268" class="fb-icon"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+        <a href="https://www.instagram.com/trkhaing_/" class="ins-icon"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+    </div>
+    <div class="ft-content">
+        <div class="wrapper">
+            <div class="inner">
+                <div class="grid">
+                    <div class="grid__item large--four-twelfths medium--one-whole small--one-whole">
+                        <div class="ft-contact">
+                            <h3>Hệ thống cửa hàng giày</h3>
+                            <div class="ft-contact-address">
+                                Địa chỉ: 12 Đường số 9, Trường Thọ, Thủ Đức
+                            </div>
+                            <div class="ft-contact-tel">
+                                Số điện thoại: <a href="tel:0965745029">0965745029</a>
+                            </div>
+                            <div class="ft-contact-email">
+                                Email: <a href="mailto:khainguyenn.0312011@gmail.com">khainguyenn.0312011@gmail.com</a>
+                            </div>
+                            <div class="ft-certification">
+                                <a href="javascript:void(0)"><img src="~/img/ft_certi_img15eef.png" alt="Đã thông báo Bộ Công Thương" /></a>
+                                <a href="javascript:void(0)"><img src="~/img/ft_certi_img25eef.png" alt="Đã đăng ký Bộ Công Thương" /></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid__item large--two-twelfths medium--one-third small--one-half">
+                        <div class="ft-nav">
+                            <h3>Liên kết nhanh</h3>
+                            <ul class="no-bullets">
+                                <li>
+                                    <a href="@Url.Action("gioithieu","User")">Giới thiệu</a>
+                                </li>
+
+                                <li>
+                                    <a>Chính sách đổi trả</a>
+                                </li>
+
+                                <li>
+                                    <a>Chính sách bảo mật</a>
+                                </li>
+
+                                <li>
+                                    <a>Điều khoản dịch vụ</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="grid__item large--two-twelfths medium--one-third small--one-half">
+                        <div class="ft-oh">
+                            <h3>Giờ mở cửa</h3>
+                            <div class="ft-oh-desc">
+                                Từ 8:00 - 22:00 tất cả các ngày trong tuần (bao gồm cả các ngày lễ, ngày Tết).
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid__item large--four-twelfths medium--one-third small--one-whole">
+                        <div class="ft-subscribe">
+                            <h3>Đăng ký nhận tin</h3>
+                            <div class="ft-sub-desc">
+                                Mỗi tháng chúng tôi đều có những đợt giảm giá dịch vụ và sản phẩm nhằm chi ân khách hàng. Để có thể cập nhật kịp thời những đợt giảm giá này, vui lòng nhập địa chỉ email của bạn vào ô dưới đây.
+                            </div>
+                            <div class="ft-sub-wrapper">
+
+                                <form accept-charset='UTF-8' action='mailto:khainguyenn.0312011@gmail.com' class='contact-form' method='post'>
+                                    <input name='form_type' type='hidden' value='customer'>
+                                    <input name='utf8' type='hidden' value='✓'>
+
+
+
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ft-copyrights-wrapper">
+        <div class="wrapper">
+
+            <div class="inner">
+                <div class="grid">
+                    <div class="grid__item large--one-third small--one-whole">
+                        <div class="ft-links text-left">
+
+
+                        </div>
+                    </div>
+                    <div class="grid__item large--one-third small--one-whole">
+                        <div class="ft-social-network text-center">
+
+                            <a href="https://www.facebook.com/profile.php?id=100015343247268"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+
+
+                            <a href="https://www.instagram.com/trkhaing_/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                    <div class="grid__item large--one-third small--one-whole">
+                        <div class="ft-copyrights text-right">
+                            Copyrights © 2022 by <a target="_blank" href="https://www.facebook.com/profile.php?id=100015343247268">Nguyễn Trọng Khải</a>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<div id="modalAddComplete">
+</div>
+
+<button type="button" id="modalAddCompleteBtn" style="display: none;"></button>
+
+<script>
+    // Get the modal
+    var modalAddComplete = document.getElementById('modalAddComplete');
+
+    // Get the button that opens the modal
+    var modalAddCompleteBtn = document.getElementById("modalAddCompleteBtn");
+
+    // When the user clicks the button, open the modal
+    modalAddCompleteBtn.onclick = function () {
+        modalAddComplete.style.display = "block";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modalAddComplete) {
+            modalAddComplete.style.display = "none";
+        }
+    }
+</script>
+<script language="javascript" src="~/Scripts/ajax-cart5eef.js"></script>
+<!-- Custom script -->
+<script>
+    if ($(window).width() > 768) {
+        setTimeout(function () {
+            $("#ProductThumbs .thumbnail-item:first-child a").trigger('click');
+        }, 10);
+    };
+</script>
+<script language="javascript" src="~/Scripts/hoverchangeimage.js"></script>
+<!-- accordion -->
+<script language="javascript" src="~/Scripts/accordion.js"></script>
+<!-- Owl carousel init -->
+<script language="javascript" src="~/Scripts/Owlcarousel.js"></script>
+<!-- Back to top -->
+<script language="javascript" src="~/Scripts/backtotop.js"></script>
+<!-- Validate quantity form & trigger zoom -->
+<script language="javascript" src="~/Scripts/triggerzoom.js"></script>
+<!--thuc hiên-->
+<script language="javascript" src="~/Scripts/thuchien.js"></script>
+
+<!---->
+<script language="javascript" src="~/Scripts/quickview.js"></script>
+
+<script>
+    $(".hc-search-wrapper > a").click(function () {
+        $(".search-bar-header").toggle();
+    });
+</script>
+

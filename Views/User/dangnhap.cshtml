@@ -1,0 +1,316 @@
+﻿@model ShopGiay.Models.DangnhapModel
+@{
+    ViewBag.Title = "Đăng Nhập || NTK";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<section id="breadcrumb-wrapper3" class="breadcrumb-w-img">
+    <div class="breadcrumb-overlay"></div>
+    <div class="breadcrumb-content">
+        <div class="wrapper">
+            <div class="inner text-center">
+                <div class="breadcrumb-big">
+
+                    <h2>
+                        ĐĂNG NHẬP
+                    </h2>
+
+                </div>
+                <div class="breadcrumb-small">
+                    <a href="@Url.Action("index","User")" title="Quay trở về trang chủ">Trang chủ</a>
+
+
+
+                    <span aria-hidden="true">/</span>
+
+                    <span>Đăng Nhập</span>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="PageContainer" class="is-moved-by-drawer">
+    <main class="main-content" role="main">
+        <section id="page-wrapper">
+            <div class="wrapper">
+                <div class="inner">
+
+                    <div class="grid">
+
+                        <div class="grid__item large--one-third push--large--one-third text-center">
+
+
+                            <div class="note form-success" id="ResetSuccess" style="display:none;">
+                                Chúng tôi đã gửi một email với đường dẫn để giúp bạn cập nhật mật khẩu.
+                            </div>
+
+                            <div id="CustomerLoginForm" class="form-vertical">
+                                <form accept-charset="UTF-8" method="post">
+                                    <input name="form_type" type="hidden" value="customer_login">
+                                    <input name="utf8" type="hidden" value="✓">
+                                    <h1>Đăng nhập</h1>
+                                    <h4 style="color:red; text-align:center"> @ViewBag.Thongbao</h4>
+                                    @using (Html.BeginForm("dangnhap", "User", FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationSummary(true)
+                                        <div class="form-horizontal">
+                                            <div style="color:red;font-size:small;text-align:initial">
+                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="form-group" style="text-align:left;">
+                                                @Html.LabelFor(model => model.tendn, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div style="color:red;font-size:small;text-align:initial">
+                                                    @Html.ValidationMessageFor(model => model.tendn, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <input class="form-control text-box single-line input-full " data-val="true" data-val-required=" Tên đăng nhập không được để trống. " id="tendn" name="tendn" type="text" value="">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group" style="text-align:left;">
+                                                @Html.LabelFor(model => model.matkhau, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div style="color:red;font-size:small;text-align:initial">
+                                                    @Html.ValidationMessageFor(model => model.matkhau, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <input class="form-control text-box single-line input-full" data-val="true" data-val-length="Độ dài mật khẩu ít nhất 6 - 20 ký tự. " data-val-length-max="20" data-val-length-min="6" data-val-required="Mật khẩu không được để trống. " id="matkhau" name="matkhau" type="password" value="">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-md-offset-2 col-md-10">
+                                                    <input type="submit" value="Đăng nhập" class="btn btn--full" />
+                                                    <p><a href="@Url.Action("index","User")">Trở về</a></p>
+                                                    <p><a href="@Url.Action("dangky","User")">Đăng kí</a></p>
+
+                                                    <p><a href="@Url.Action("QuenMK","User")">Quên mật khẩu?</a></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </form>
+                            </div>
+
+
+                            <div id="RecoverPasswordForm" style="display: none;">
+
+                                <h2>Cài đặt lại mật khẩu</h2>
+                                <p>Mật khẩu mới sẽ được gửi về email của bạn.</p>
+
+                                <div class="form-vertical">
+                                    <form accept-charset="UTF-8" action="/account/recover" method="post">
+                                        <input name="form_type" type="hidden" value="recover_customer_password">
+                                        <input name="utf8" type="hidden" value="✓">
+                                        <label for="RecoverEmail" class="hidden-label">Email</label>
+                                        <input type="email" value="" name="email" id="RecoverEmail" class="input-full" placeholder="Email" autocorrect="off" autocapitalize="off">
+
+                                        <p>
+                                            <input type="submit" class="btn btn--full" value="Gửi">
+                                        </p>
+                                        <button type="button" id="HideRecoverPasswordLink" class="text-link">Bỏ qua</button>
+
+                                    </form>
+                                </div>
+
+                            </div>
+
+
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+</div>
+<section id="brands-slider">
+    <div class="inner">
+        <div class="grid">
+            <div id="owl-brands-slider" class="owl-carousel owl-theme">
+                @Html.Action("hinhthuonghieu")
+
+            </div>
+        </div>
+    </div>
+</section>
+<footer id="footer">
+    <div id="ft-social-network" class="clearfix large--hide">
+        <a href="https://www.facebook.com/profile.php?id=100015343247268" class="fb-icon"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+        <a href="https://www.instagram.com/trkhaing_/" class="ins-icon"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+    </div>
+    <div class="ft-content">
+        <div class="wrapper">
+            <div class="inner">
+                <div class="grid">
+                    <div class="grid__item large--four-twelfths medium--one-whole small--one-whole">
+                        <div class="ft-contact">
+                            <h3>Hệ thống cửa hàng giày</h3>
+                            <div class="ft-contact-address">
+                                Địa chỉ: Tp. Hồ Chí Minh
+                            </div>
+                            <div class="ft-contact-tel">
+                                Số điện thoại: <a href="tel:0384533735">0384533735</a>
+                            </div>
+                            <div class="ft-contact-email">
+                                Email: <a href="mailto:khainguyenn.0312011@gmail.com">khainguyenn.0312011@gmail.com</a>
+                            </div>
+                            <div class="ft-certification">
+                                <a href="javascript:void(0)"><img src="~/img/ft_certi_img15eef.png" alt="Đã thông báo Bộ Công Thương" /></a>
+                                <a href="javascript:void(0)"><img src="~/img/ft_certi_img25eef.png" alt="Đã đăng ký Bộ Công Thương" /></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid__item large--two-twelfths medium--one-third small--one-half">
+                        <div class="ft-nav">
+                            <h3>Liên kết nhanh</h3>
+                            <ul class="no-bullets">
+                                <li>
+                                    <a href="@Url.Action("gioithieu","User")">Giới thiệu</a>
+                                </li>
+
+                                <li>
+                                    <a>Chính sách đổi trả</a>
+                                </li>
+
+                                <li>
+                                    <a>Chính sách bảo mật</a>
+                                </li>
+
+                                <li>
+                                    <a>Điều khoản dịch vụ</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="grid__item large--two-twelfths medium--one-third small--one-half">
+                        <div class="ft-oh">
+                            <h3>Giờ mở cửa</h3>
+                            <div class="ft-oh-desc">
+                                Từ 8:00 - 22:00 tất cả các ngày trong tuần (bao gồm cả các ngày lễ, ngày Tết).
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid__item large--four-twelfths medium--one-third small--one-whole">
+                        <div class="ft-subscribe">
+                            <h3>Đăng ký nhận tin</h3>
+                            <div class="ft-sub-desc">
+                                Mỗi tháng chúng tôi đều có những đợt giảm giá dịch vụ và sản phẩm nhằm chi ân khách hàng. Để có thể cập nhật kịp thời những đợt giảm giá này, vui lòng nhập địa chỉ email của bạn vào ô dưới đây.
+                            </div>
+                            <div class="ft-sub-wrapper">
+
+                                <form accept-charset='UTF-8' action='mailto:khainguyenn.0312011@gmail.com' class='contact-form' method='post'>
+                                    <input name='form_type' type='hidden' value='customer'>
+                                    <input name='utf8' type='hidden' value='✓'>
+
+
+
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ft-copyrights-wrapper">
+        <div class="wrapper">
+
+            <div class="inner">
+                <div class="grid">
+                    <div class="grid__item large--one-third small--one-whole">
+                        <div class="ft-links text-left">
+
+
+                        </div>
+                    </div>
+                    <div class="grid__item large--one-third small--one-whole">
+                        <div class="ft-social-network text-center">
+
+                            <a href="https://www.facebook.com/profile.php?id=100015343247268"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+
+
+                            <a href="https://www.instagram.com/trkhaing_/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                    <div class="grid__item large--one-third small--one-whole">
+                        <div class="ft-copyrights text-right">
+                            Copyrights © 2021 by <a target="_blank" href="mailto:khainguyenn.0312011@gmail.com">NTK</a>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+<script language="javascript" src="~/Scripts/owlcarousel.js">
+</script>
+
+
+
+<script>
+    // Get the modal
+    var modalAddComplete = document.getElementById('modalAddComplete');
+
+    // Get the button that opens the modal
+    var modalAddCompleteBtn = document.getElementById("modalAddCompleteBtn");
+
+    // When the user clicks the button, open the modal
+    modalAddCompleteBtn.onclick = function () {
+        modalAddComplete.style.display = "block";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modalAddComplete) {
+            modalAddComplete.style.display = "none";
+        }
+    }
+</script>
+
+<script language="javascript" src="~/Scripts/ajax-cart5eef.js"></script>
+<!-- Custom script -->
+<script>
+    if ($(window).width() > 768) {
+        setTimeout(function () {
+            $("#ProductThumbs .thumbnail-item:first-child a").trigger('click');
+        }, 10);
+    };
+</script>
+<script language="javascript" src="~/Scripts/hoverchangeimage.js"></script>
+<!-- accordion -->
+<script language="javascript" src="~/Scripts/accordion.js"></script>
+<!-- Owl carousel init -->
+<script language="javascript" src="~/Scripts/Owlcarousel.js"></script>
+<!-- Back to top -->
+<script language="javascript" src="~/Scripts/backtotop.js"></script>
+<!-- Validate quantity form & trigger zoom -->
+<script language="javascript" src="~/Scripts/triggerzoom.js"></script>
+<!--thuc hiên-->
+<script language="javascript" src="~/Scripts/thuchien.js"></script>
+<!-- popup loaded -->
+
+<script language="javascript" src="~/Scripts/quickview.js"></script>
+<script>
+    $(".hc-search-wrapper > a").click(function () {
+        $(".search-bar-header").toggle();
+    });
+</script>
